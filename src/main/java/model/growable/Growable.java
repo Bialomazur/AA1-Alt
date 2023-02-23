@@ -46,10 +46,6 @@ public class Growable {
         this.population *= GROWTH_FACTOR;
     }
 
-    public void reduceAmount(final int amount) {
-        this.population -= amount;
-    }
-
     public int getGrowthInterval() {
         return this.plantType.getGrowthInterval();
     }

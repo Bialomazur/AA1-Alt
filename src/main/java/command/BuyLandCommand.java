@@ -11,7 +11,7 @@ public class BuyLandCommand extends GameCommand {
     private static final int X_COORDINATE_INDEX = 0;
     private static final int Y_COORDINATE_INDEX = 1;
 
-    BuyLandCommand(final Game game, final List<String> args) {
+    public BuyLandCommand(final Game game, final List<String> args) {
         super(game, args);
     }
 

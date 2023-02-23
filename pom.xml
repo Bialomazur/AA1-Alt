@@ -6,4 +6,16 @@
   <version>1.0-SNAPSHOT</version>
   <name>Archetype - AA1-Alt</name>
   <url>http://maven.apache.org</url>
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>RELEASE</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>

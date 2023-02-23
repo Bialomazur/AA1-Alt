@@ -4,11 +4,59 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86753ab7-fa7e-4396-8047-57bb02533331" name="Changes" comment="" />
+    <list default="true" id="86753ab7-fa7e-4396-8047-57bb02533331" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/command/AddPlayerCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/command/EmptyGameCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/command/GameCommandFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/CommandWordRegistry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/InfoLogger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/Logger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/command/GameCommandFactoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/BuyLandCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/BuyLandCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/EndGameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/EndGameCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/EndTurnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/EndTurnCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/FlushEventQueueCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/FlushEventQueueCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/GameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/GameCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/MetaCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/MetaCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/Output.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/Output.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/ShowBarnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/ShowBarnCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/CommandWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/CommandWord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/Session.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/event/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/event/EventLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/event/EventLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/event/EventType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/event/EventType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/event/LogEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/event/LogEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/growable/Growable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/growable/Growable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/growable/GrowablePluralNameLengthComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/growable/GrowablePluralNameLengthComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Barn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Barn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/Clock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/time/Clock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/Countdown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/time/Countdown.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/CountdownClock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/time/CountdownClock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/CultivableMapCountdown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/time/CultivableMapCountdown.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/MasterClock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/time/MasterClock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/SpoilCountdown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/time/SpoilCountdown.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/command/ShowBarnCommandTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/command/ShowBarnCommandTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -18,7 +66,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2M47JuvhhHCyAhDwejnkVv8lNTp" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -27,10 +77,142 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "/home/outlaw/IdeaProjects/AA1-Alt/src/main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "com.github.copilot.settings.ApplicationConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="IntroduceConstantDialog.RECENTS_KEY">
+      <recent name="command.GameCommandFactoryTest" />
+      <recent name="model.map.Barn" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="command" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.GameCommandFactoryTest.basicTest">
+    <configuration name="default" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Application" />
+      <module name="AA1-Alt" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameCommandFactoryTest.basicTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AA1-Alt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="command.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="command" />
+      <option name="MAIN_CLASS_NAME" value="command.GameCommandFactoryTest" />
+      <option name="METHOD_NAME" value="basicTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameCommandFactoryTest.reflectionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AA1-Alt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="command.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="command" />
+      <option name="MAIN_CLASS_NAME" value="command.GameCommandFactoryTest" />
+      <option name="METHOD_NAME" value="reflectionTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShowBarnCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AA1-Alt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="command.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="command" />
+      <option name="MAIN_CLASS_NAME" value="command.ShowBarnCommandTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShowBarnCommandTest.barnWithDifferingGrowableCounts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AA1-Alt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="command.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="command" />
+      <option name="MAIN_CLASS_NAME" value="command.ShowBarnCommandTest" />
+      <option name="METHOD_NAME" value="barnWithDifferingGrowableCounts" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShowBarnCommandTest.barnWithoutSomeGrowables" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AA1-Alt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="command.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="command" />
+      <option name="MAIN_CLASS_NAME" value="command.ShowBarnCommandTest" />
+      <option name="METHOD_NAME" value="barnWithoutSomeGrowables" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.default" />
+      <item itemvalue="JUnit.GameCommandFactoryTest.basicTest" />
+      <item itemvalue="JUnit.GameCommandFactoryTest.reflectionTest" />
+      <item itemvalue="JUnit.ShowBarnCommandTest" />
+      <item itemvalue="JUnit.ShowBarnCommandTest.barnWithDifferingGrowableCounts" />
+      <item itemvalue="JUnit.ShowBarnCommandTest.barnWithoutSomeGrowables" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.GameCommandFactoryTest.basicTest" />
+        <item itemvalue="JUnit.GameCommandFactoryTest.reflectionTest" />
+        <item itemvalue="JUnit.ShowBarnCommandTest" />
+        <item itemvalue="JUnit.ShowBarnCommandTest.barnWithoutSomeGrowables" />
+        <item itemvalue="JUnit.ShowBarnCommandTest.barnWithDifferingGrowableCounts" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -39,7 +221,35 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677014933890</updated>
+      <workItem from="1677014934903" duration="11870000" />
+      <workItem from="1677033362940" duration="17814000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/command/GameCommandFactoryTest.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" log-message="true" suspend="NONE" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/command/GameCommandFactory.java</url>
+          <line>31</line>
+          <log-expression expression="e.printStackTrace()" language="JAVA" />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" log-message="true" suspend="NONE" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/command/GameCommandFactory.java</url>
+          <line>22</line>
+          <log-expression expression="commandEntry.getValue()" language="JAVA" />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

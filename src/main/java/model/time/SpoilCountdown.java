@@ -1,6 +1,7 @@
 package model.time;
 
-import model.log.LogEntry;
+import model.event.Event;
+import model.event.EventType;
 import model.map.Barn;
 
 public class SpoilCountdown extends Countdown {
@@ -19,10 +20,10 @@ public class SpoilCountdown extends Countdown {
     @Override
     protected int execute() {
         // spoil barn, reset countdown and deactivate the countdown because afterwards the barn will be empty.
-        this.target.spoil();
         this.resetCountdown();
         this.deactivate();
-        this.setLog(LogEntry.BARN_SPOILED.format());
+        this.setEvent(new Event(EventType.BARN_HAS_SPOILED, this.target.getTotalUnitsStored()));
+        this.target.spoil();
         return this.getCurrentCount();
     }
 }

@@ -5,7 +5,7 @@ import model.Game;
 import java.util.List;
 
 public class MetaCommand extends GameCommand {
-    MetaCommand(Game game, List<String> args) {
+    public MetaCommand(Game game, List<String> args) {
         super(game, args);
     }
 

@@ -1,2 +1,7 @@
-package model.event;public class EventType {
+package model.event;
+
+public enum EventType {
+    BARN_HAS_SPOILED,
+    VEGETABLES_GROWN,
+    NOTHING,
 }

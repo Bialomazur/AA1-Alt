@@ -1,6 +1,7 @@
 package model.time;
 
-import model.log.LogEntry;
+import model.event.Event;
+import model.event.EventType;
 import model.map.CultivableTile;
 import model.map.TileMap;
 
@@ -9,7 +10,6 @@ import java.util.Set;
 
 public class CultivableMapCountdown extends Countdown {
     private static final int POPULATION_INCREASE_LOWER_BOUNDARY = 0;
-    private static final int SINGULAR_POPULATION_INCREASE = 1;
     private final TileMap target;
 
     private final Set<GrowthCountdown> growthCountdowns = new HashSet<>();
@@ -28,11 +28,7 @@ public class CultivableMapCountdown extends Countdown {
             totalPopulationIncrease += countdown.count();
         }
 
-        if (totalPopulationIncrease == SINGULAR_POPULATION_INCREASE) {
-            this.setLog(LogEntry.SINGLE_VEGETABLE_GROWN_SINCE_LAST_TURN.format());
-        } else if (totalPopulationIncrease > SINGULAR_POPULATION_INCREASE) {
-            this.setLog(LogEntry.MULTIPLE_VEGETABLES_GROWN_SINCE_LAST_TURN.format(totalPopulationIncrease));
-        }
+        this.setEvent(new Event(EventType.VEGETABLES_GROWN, totalPopulationIncrease));
 
         this.clearDeactivatedGrowthCountdowns();
         return totalPopulationIncrease;

@@ -1,4 +1,4 @@
-package model.log;
+package model.event;
 
 import java.util.HashMap;
 import java.util.Map;

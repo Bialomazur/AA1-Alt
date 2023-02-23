@@ -13,7 +13,7 @@ public class Game {
     private final Set<Player> players = new HashSet<>();
     private final int winningGoldAmount;
     private final int startingGoldAmount;
-
+    private boolean running;
     private static final int PLAYER_ID_INCREMENT = 1;
 
     public Game(final int startingGoldAmount, final int winningGoldAmount) {
@@ -49,16 +49,17 @@ public class Game {
 
     public void start() {
         this.init();
+        this.running = true;
     }
 
     public void end() {
-
+        this.running = false;
     }
 
     //TODO: consider calling this nextTurn() instead for more consistency with nextAction().
     public void endTurn() {
         market.updatePrices();
-        this.masterClock.nextTurn();
+      //  this.masterClock.nextTurn(); TODO: Fix this through implementing the new master clock & time system.
 
         if (masterClock.newRoundStarted() && !getPlayersWithWinningGoldAmount().isEmpty()) {
             end();
@@ -89,5 +90,10 @@ public class Game {
             }
         }
         return null;
+    }
+
+
+    public boolean isRunning() {
+        return this.running;
     }
 }

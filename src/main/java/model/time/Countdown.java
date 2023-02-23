@@ -1,16 +1,17 @@
 package model.time;
 
-import model.log.LogEntry;
-
 // TODO !!!! Fix DRY-Violation of using target in multiple countdown subclasses
 // TODO Fix those ugly variable names
+
+import model.event.Event;
+import model.event.EventType;
 
 public abstract class Countdown {
     private boolean active;
     private final int countDelta;
     private int currentCount;
     private final int defaultCount;
-    private String log;
+    private Event event;
     private static final int COUNT_LOWER_BOUNDARY = 0;
     private static final int DEFAULT_COUNT_RETURN = 0;
     private static final boolean SHOULD_ACTIVATE_ON_DEFAULT = false;
@@ -62,14 +63,14 @@ public abstract class Countdown {
         return DEFAULT_COUNT_RETURN;
     }
 
-    String flush() {
-        final String log = this.log;
-        this.log = LogEntry.EMPTY_LOG.format();
-        return log;
+    Event flush() {
+        final Event event = this.event;
+        this.event = new Event(EventType.NOTHING, DEFAULT_COUNT_RETURN);
+        return event;
     }
 
-    void setLog(final String log) {
-        this.log = log;
+    protected void setEvent(final Event event) {
+        this.event = event;
     }
 
     protected abstract int execute();

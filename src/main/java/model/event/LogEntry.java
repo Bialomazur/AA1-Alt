@@ -1,4 +1,4 @@
-package model.log;
+package model.event;
 
 public enum LogEntry {
     LINE_SEPARATOR("\n"),

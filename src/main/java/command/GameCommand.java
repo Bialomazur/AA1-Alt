@@ -10,10 +10,10 @@ public abstract class GameCommand {
     private final Game game;
     private final List<String> arguments = new ArrayList<>();
 
-    private String output = "";
+    private String output = Output.EMPTY_OUTPUT.format();
 
 
-    GameCommand(final Game game, final List<String> args) {
+    protected GameCommand(final Game game, final List<String> args) {
         this.game = game;
         this.arguments.addAll(args);
     }
@@ -34,10 +34,11 @@ public abstract class GameCommand {
         this.output = output;
     }
 
-    public String getOutput() {
-        return this.output;
+    public String flush() {
+        String result = this.output;
+        this.output = Output.EMPTY_OUTPUT.format();
+        return result;
     }
-
     private boolean checkArgumentsCount() {
         return this.arguments.size() >= this.getMinArgumentCount()
                 && this.arguments.size() <= this.getMaxArgumentCount();

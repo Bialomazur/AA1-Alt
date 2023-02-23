@@ -17,7 +17,7 @@ public class EndTurnCommand extends GameCommand {
     private static final int MAX_ARGUMENT_COUNT = 0;
     private static final boolean NO_ARGUMENT_CONTENT_VERIFICATION = true;
 
-    protected EndTurnCommand(final Game game, final List<String> args) {
+    public EndTurnCommand(final Game game, final List<String> args) {
         super(game, args);
     }
 

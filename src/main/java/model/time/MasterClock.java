@@ -1,19 +1,23 @@
 package model.time;
 
-import model.log.EventLog;
-import model.log.LogEntry;
+import model.event.Event;
+import model.event.EventLog;
+import model.event.LogEntry;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 
 //TODO !!!! Overthink not making turnsPerRound and actionsPerTurn final.
 
-public class MasterClock {
+public class MasterClock implements Clock {
+    private final Map<Integer, Set<Countdown>> countdowns = new HashMap<>();
+    private final Set<Clock> clocks = new HashSet<>();
+    private final EventLog eventLog = new EventLog();
     private int turn = STARTING_TURN;
     private int action = STARTING_ACTION;
-    private final Set<Countdown> subscribers = new HashSet<>();
-    private final EventLog eventLog = new EventLog();
     private int turnsPerRound = DEFAULT_TURNS_PER_ROUND;
     private int actionsPerTurn = DEFAULT_ACTIONS_PER_TURN;
     private static final int STARTING_TURN = 1; //TODO: Verify whether this number should be coupled to the starting id of players since it is used to determine the current player.
@@ -23,33 +27,27 @@ public class MasterClock {
 
 
     public void subscribe(final Countdown countdown) {
-        this.subscribers.add(countdown);
-    }
-
-    public void nextTurn() {
-        this.action = STARTING_ACTION;
-        this.turn++;
-        if (this.turn > this.turnsPerRound) {
-            this.turn = STARTING_TURN;
-            nextRound();
-        }
+        this.countdowns.get(turn).add(countdown);
     }
 
     public void nextAction() {
         this.action++;
         if (this.action > this.actionsPerTurn) {
-            nextTurn();
+            tick();
         }
     }
 
     //TODO:!!!! Make DAMN SURE that the logs get added to the event log with the CORRECT player id.
+    //TODO: Consider refactoring due to Arrowhead code smell.
     private void nextRound() {
-        for (final Countdown countdown : this.subscribers) {
-            countdown.count();
-            final String log = countdown.flush();
+        for (final Set<Countdown> countdowns : this.countdowns.values()) {
+            for (final Countdown countdown : countdowns) {
+                countdown.count();
+                final Event log = countdown.flush();
 
-            if (!log.equals(LogEntry.EMPTY_LOG.format())) {
-                this.eventLog.addLogEntry(turn, log);
+                if (!log.equals(LogEntry.EMPTY_LOG.format())) {
+                    //this.eventLog.addLogEntry(turn, log);
+                }
             }
         }
     }
@@ -70,4 +68,23 @@ public class MasterClock {
         return this.turn == STARTING_TURN;
     }
 
+    public void init(int turnsPerRound) {
+        for (int i = 0; i < turnsPerRound; i++) {
+            this.countdowns.put(i, new HashSet<>());
+        }
+
+        this.setTurnsPerRound(turnsPerRound);
+    }
+
+
+    //START NEXT TURN
+    @Override
+    public void tick() {
+        this.action = STARTING_ACTION;
+        this.turn++;
+        if (this.turn > this.turnsPerRound) {
+            this.turn = STARTING_TURN;
+            nextRound();
+        }
+    }
 }
