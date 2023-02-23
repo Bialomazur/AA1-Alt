@@ -1,16 +1,16 @@
-package command;
+package command.flow;
 
+import command.GameCommand;
 import model.Game;
 
 import java.util.List;
 
-public class EndGameCommand extends GameCommand {
+public class QuitGameCommand extends GameCommand {
     private static final int MIN_ARGUMENT_COUNT = 0;
     private static final int MAX_ARGUMENT_COUNT = 0;
-    private static final boolean NO_ARGUMENT_CONTENT_VERIFICATION = true;
 
-    public EndGameCommand(final Game game, final List<String> args) {
-        super(game, args);
+    public QuitGameCommand(final Game game) {
+        super(game);
     }
 
     @Override
@@ -24,13 +24,13 @@ public class EndGameCommand extends GameCommand {
     }
 
     @Override
-    protected boolean verifyArgumentsContent() {
-        return NO_ARGUMENT_CONTENT_VERIFICATION;
+    protected void validateArgumentsContent(List<String> args) {
+
     }
 
     @Override
     public void execute() {
-        this.getGame().end();
+        this.getGame().quit();
         //TODO: Build Strings
         //TODO: Add a message
     }

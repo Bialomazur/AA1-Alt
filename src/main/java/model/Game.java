@@ -52,7 +52,7 @@ public class Game {
         this.running = true;
     }
 
-    public void end() {
+    public void quit() {
         this.running = false;
     }
 
@@ -62,7 +62,7 @@ public class Game {
       //  this.masterClock.nextTurn(); TODO: Fix this through implementing the new master clock & time system.
 
         if (masterClock.newRoundStarted() && !getPlayersWithWinningGoldAmount().isEmpty()) {
-            end();
+            quit();
         }
     }
 
@@ -91,7 +91,6 @@ public class Game {
         }
         return null;
     }
-
 
     public boolean isRunning() {
         return this.running;

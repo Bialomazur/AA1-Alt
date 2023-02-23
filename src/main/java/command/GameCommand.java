@@ -1,21 +1,22 @@
 package command;
 
+import command.argument.ArgumentValidator;
 import model.Game;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class GameCommand {
     private final Game game;
     private final List<String> arguments = new ArrayList<>();
-
     private String output = Output.EMPTY_OUTPUT.format();
-
-
-    protected GameCommand(final Game game, final List<String> args) {
+    private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments";
+    private final Map<Integer, ArgumentValidator> argumentValidators = new HashMap<>();
+    protected GameCommand(final Game game) {
         this.game = game;
-        this.arguments.addAll(args);
     }
 
     protected abstract int getMinArgumentCount();
@@ -26,7 +27,7 @@ public abstract class GameCommand {
         return Collections.unmodifiableList(this.arguments); //TODO: Check if package java.util.Collections is allowed
     }
 
-    Game getGame() {
+    protected Game getGame() {
         return this.game;
     }
 
@@ -39,17 +40,19 @@ public abstract class GameCommand {
         this.output = Output.EMPTY_OUTPUT.format();
         return result;
     }
-    private boolean checkArgumentsCount() {
-        return this.arguments.size() >= this.getMinArgumentCount()
-                && this.arguments.size() <= this.getMaxArgumentCount();
+
+    public void setArgs(final List<String> args) {
+        if (args.size() < this.getMinArgumentCount() || args.size() > this.getMaxArgumentCount()) {
+            throw new IllegalArgumentException(INVALID_NUMBER_OF_ARGUMENTS);
+        }
+
+        //TODO: fishy because the commands validate arguments themselves and throw according exceptions
+        this.validateArgumentsContent(args);
+        this.arguments.clear();
+        this.arguments.addAll(args);
     }
 
-    private boolean verifyArguments() {
-        return this.checkArgumentsCount() && this.verifyArgumentsContent();
-    }
-
-    protected abstract boolean verifyArgumentsContent();
-
+    protected abstract void validateArgumentsContent(List<String> args);
 
     public abstract void execute();
 }

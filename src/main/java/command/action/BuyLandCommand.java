@@ -1,5 +1,6 @@
-package command;
+package command.action;
 
+import command.GameCommand;
 import model.Game;
 import model.Player;
 
@@ -11,8 +12,10 @@ public class BuyLandCommand extends GameCommand {
     private static final int X_COORDINATE_INDEX = 0;
     private static final int Y_COORDINATE_INDEX = 1;
 
-    public BuyLandCommand(final Game game, final List<String> args) {
-        super(game, args);
+    private static final String COORDINATES_MUST_BE_INTEGERS = "Coordinates must be integers";
+
+    public BuyLandCommand(final Game game) {
+        super(game);
     }
 
     @Override
@@ -26,15 +29,19 @@ public class BuyLandCommand extends GameCommand {
     }
 
     @Override
-    protected boolean verifyArgumentsContent() {
+    protected void validateArgumentsContent(List<String> args) {
+        boolean validCorrdinates = true;
         for (final String coordinate : this.getArguments()) {
             try {
                 Integer.parseInt(coordinate);
             } catch (final NumberFormatException e) {
-                return false;
+                validCorrdinates = false;
             }
         }
-        return true;
+
+        if (!validCorrdinates) {
+            throw new IllegalArgumentException(COORDINATES_MUST_BE_INTEGERS);
+        }
     }
 
     @Override

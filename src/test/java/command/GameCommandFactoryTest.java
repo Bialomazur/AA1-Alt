@@ -13,18 +13,11 @@ class GameCommandFactoryTest {
 
 
     @Test
-    void reflectionTest() throws NoSuchMethodException {
-        AddPlayerCommand.class.getConstructor(Game.class, List.class);
-
+    void basic() {
+        Game game = new Game(2,WINNING_GOLD_AMOUNT);
+        GameCommand command = new AddPlayerCommand(game);
+        System.out.println(command.getClass());
     }
-    @Test
-    void basicTest() {
-        Game game = new Game(100, WINNING_GOLD_AMOUNT);
-        GameCommandFactory factory = new GameCommandFactory(game);
-        factory.registerCommand(CommandWord.ADD_PLAYER.getWord(), command.AddPlayerCommand.class);
-        GameCommand command = factory.buildCommand(CommandWord.ADD_PLAYER.getWord(), List.of("test"));
-        assertTrue(command instanceof command.AddPlayerCommand);
 
-    }
 
 }

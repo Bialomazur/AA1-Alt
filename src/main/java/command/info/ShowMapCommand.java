@@ -1,22 +1,15 @@
-package command;
+package command.info;
 
+import command.GameCommand;
 import model.Game;
 
 import java.util.List;
 
-/**
- * Class modelling an empty game command.
- * The empty game command is used for representing an "invalid" command doing nothing
- * and thus preventing unnecessary null-checks.
- *
- * @author uejxk
- * @version 1.0
- * */
-
-public class EmptyGameCommand extends GameCommand {
+public class ShowMapCommand extends GameCommand {
     private static final int MIN_ARGUMENT_COUNT = 0;
     private static final int MAX_ARGUMENT_COUNT = 0;
-    public EmptyGameCommand(Game game) {
+
+    public ShowMapCommand(Game game) {
         super(game);
     }
 

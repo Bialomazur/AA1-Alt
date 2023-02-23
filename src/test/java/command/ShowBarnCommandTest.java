@@ -1,5 +1,6 @@
 package command;
 
+import command.info.ShowBarnCommand;
 import model.Game;
 import model.growable.Growable;
 import model.growable.PlantType;
@@ -32,7 +33,8 @@ class ShowBarnCommandTest {
         final Game game = new Game(5000, 100000000);
         game.addPlayer("Player 1");
 
-        GameCommand command = new ShowBarnCommand(game, ARGS);
+        GameCommand command = new ShowBarnCommand(game);
+        command.setArgs(ARGS);
         game.start();
 
         for (PlantType plantType : PlantType.values()) {
@@ -59,7 +61,8 @@ class ShowBarnCommandTest {
         final Game game = new Game(5, 100000000);
         game.addPlayer("Player 1");
 
-        GameCommand command = new ShowBarnCommand(game, ARGS);
+        GameCommand command = new ShowBarnCommand(game);
+        command.setArgs(ARGS);
         game.start();
 
         for (PlantType plantType : PlantType.values()) {
@@ -87,7 +90,8 @@ class ShowBarnCommandTest {
         final Game game = new Game(5, 100000000);
         game.addPlayer("Player 1");
 
-        GameCommand command = new ShowBarnCommand(game, ARGS);
+        GameCommand command = new ShowBarnCommand(game);
+        command.setArgs(ARGS);
         game.start();
 
         Growable carrot = new Growable(PlantType.CARROT, 99);
@@ -120,7 +124,8 @@ class ShowBarnCommandTest {
         final Game game = new Game(5, 100000000);
         game.addPlayer("Player 1");
 
-        GameCommand command = new ShowBarnCommand(game, ARGS);
+        GameCommand command = new ShowBarnCommand(game);
+        command.setArgs(ARGS);
         game.start();
         Barn barn = game.getCurrentPlayer().getTileMap().getBarn();
         barn.spoil();
@@ -150,7 +155,8 @@ class ShowBarnCommandTest {
         final Game game = new Game(5, 100000000);
         game.addPlayer("Player 1");
 
-        GameCommand command = new ShowBarnCommand(game, ARGS);
+        GameCommand command = new ShowBarnCommand(game);
+        command.setArgs(ARGS);
         game.start();
         game.getCurrentPlayer().getTileMap().getBarn().spoil();
 

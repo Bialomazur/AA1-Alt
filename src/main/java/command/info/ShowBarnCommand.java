@@ -1,5 +1,7 @@
-package command;
+package command.info;
 
+import command.GameCommand;
+import command.Output;
 import model.Game;
 import model.Player;
 import model.growable.Growable;
@@ -24,8 +26,8 @@ public class ShowBarnCommand extends GameCommand {
     private static final int GOLD_LINE_SEPARATOR_LENGTH = 2;
 
 
-    public ShowBarnCommand(final Game game, final List<String> args) {
-        super(game, args);
+    public ShowBarnCommand(final Game game) {
+        super(game);
     }
 
     @Override
@@ -39,8 +41,8 @@ public class ShowBarnCommand extends GameCommand {
     }
 
     @Override
-    protected boolean verifyArgumentsContent() {
-        return NO_ARGUMENT_CONTENT_VERIFICATION;
+    protected void validateArgumentsContent(List<String> args) {
+        // No argument content verification
     }
 
 

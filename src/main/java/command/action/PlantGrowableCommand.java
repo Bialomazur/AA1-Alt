@@ -1,12 +1,13 @@
-package command;
+package command.action;
 
+import command.GameCommand;
 import model.Game;
 
 import java.util.List;
 
-//TODO: Figure out how to realize meta commands
-public class MetaCommand extends GameCommand {
-    public MetaCommand(Game game) {
+public class PlantGrowableCommand extends GameCommand {
+
+    public PlantGrowableCommand(Game game) {
         super(game);
     }
 

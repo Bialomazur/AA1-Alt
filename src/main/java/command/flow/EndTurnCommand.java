@@ -1,25 +1,26 @@
-package command;
+package command.flow;
 
+import command.GameCommand;
 import model.Game;
 
 import java.util.List;
 
 
 /**
- * Class modelling a command that flushes the game's event queue and
- * transforms its content to a corresponding String output.
+ * Class modelling a command that ends the current player's turn.
  *
  * @author uejxk
  * @version 1.0
  * */
 
-public class FlushEventQueueCommand extends GameCommand {
+public class EndTurnCommand extends GameCommand {
     private static final int MIN_ARGUMENT_COUNT = 0;
     private static final int MAX_ARGUMENT_COUNT = 0;
     private static final boolean NO_ARGUMENT_CONTENT_VERIFICATION = true;
+    private static final String GAME_NOT_RUNNING = "The game is not running.";
 
-    public FlushEventQueueCommand(Game game, List<String> args) {
-        super(game, args);
+    public EndTurnCommand(final Game game) {
+        super(game);
     }
 
     @Override
@@ -33,12 +34,16 @@ public class FlushEventQueueCommand extends GameCommand {
     }
 
     @Override
-    protected boolean verifyArgumentsContent() {
-        return NO_ARGUMENT_CONTENT_VERIFICATION;
+    protected void validateArgumentsContent(List<String> args) {
+
     }
 
     @Override
     public void execute() {
+        if (!this.getGame().isRunning()) {
+            throw new IllegalStateException(GAME_NOT_RUNNING);
+        }
 
+        this.getGame().endTurn();
     }
 }
