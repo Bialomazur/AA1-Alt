@@ -1,6 +1,8 @@
 package model.growable;
 
 
+import java.util.Objects;
+
 /**
  * class modelling a growable object.
  * <p>
@@ -21,8 +23,13 @@ public class Growable {
     private final PlantType plantType;
     private int population;
     private static final int GROWTH_FACTOR = 2;
+    private static final int MIN_POPULATION = 0;
+    private static final String POPULATION_CANNOT_BE_LESS_THAN = "Population cannot be less than %d.";
 
     public void setPopulation(final int population) {
+        if (population < MIN_POPULATION) {
+            throw new IllegalArgumentException(POPULATION_CANNOT_BE_LESS_THAN.formatted(MIN_POPULATION));
+        }
         this.population = population;
     }
 
@@ -36,6 +43,7 @@ public class Growable {
 
     public Growable(final Growable growable) {
         this.plantType = growable.getPlantType();
+        this.population = growable.getPopulation();
     }
 
     public Growable(final PlantType plantType, final int population) {
@@ -51,4 +59,39 @@ public class Growable {
         return this.plantType.getGrowthInterval();
     }
 
+
+    //TODO: Verify that this is the correct way to implement equals and hashcode.
+    //TODO: Add that this is auto-generated if happens to be used.
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        final Growable growable = (Growable) o;
+        return this.plantType == growable.plantType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.plantType);
+    }
+
+    public String getPluralName() {
+        return this.plantType.getPluralName();
+    }
+
+    public String getSingularName() {
+        return this.plantType.getSingularName();
+    }
+
+    public String getNickName() {
+        return this.plantType.getNickName();
+    }
+
+    public void kill() {
+        this.population = MIN_POPULATION;
+    }
+
+    public boolean isAlive() {
+        return this.population > MIN_POPULATION;
+    }
 }

@@ -13,7 +13,6 @@ public class Barn extends Tile {
     private static final int MIN_STORABLE_UNITS = 1;
     private static final int DEFAULT_UNITS_STORED = 1;
 
-
     public void spoil() {
         this.growables.clear();
     }

@@ -4,49 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86753ab7-fa7e-4396-8047-57bb02533331" name="Changes" comment="Basic IO implementation almost finished">
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/action/BuyGrowableCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/info/ShowMarketCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/setup/DispatchTileCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/setup/SetPlayerCountCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/setup/SetStartingGoldCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/setup/SetWinningGoldCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/log/ErrorLogger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/log/InfoLogger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/log/Logger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/session/ConfigurationSession.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/session/PlaySession.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/session/Session.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/map/NewBarn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/map/NewTile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/map/TileDispatcher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/map/TileType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/command/setup/ShuffleTilesCommandTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/io/PlaySessionTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/io/SessionTest.java" afterDir="false" />
+    <list default="true" id="86753ab7-fa7e-4396-8047-57bb02533331" name="Changes" comment="IO finished, reformatting growable.java and Tile.java">
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/map/NewCultivableTile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/AddPlayerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/setup/AddPlayerCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/CommandExpression.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/GameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/GameCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/GameCommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/GameCommandFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/action/BuyLandCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/action/BuyLandCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/flow/EndTurnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/action/EndTurnCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/flow/QuitGameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/action/QuitGameCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/info/ShowMapCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/info/ShowBoardCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/setup/ShuffleTilesCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/setup/ShuffleTilesCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/CommandWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/CommandWord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/CommandWordRegistry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/Logger.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/MainLogger.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/Session.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/event/EventType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/event/EventType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/growable/Growable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/growable/Growable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/BiotopeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/BiotopeType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/TileMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/TileMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/command/GameCommandFactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/command/GameCommandFactoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/command/ShowBarnCommandTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/command/ShowBarnCommandTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Barn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Barn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/NewBarn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/NewBarn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/NewTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/NewTile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +197,7 @@
       <option name="presentableId" value="Default" />
       <updated>1677014933890</updated>
       <workItem from="1677014934903" duration="11870000" />
-      <workItem from="1677033362940" duration="71013000" />
+      <workItem from="1677033362940" duration="77379000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented Java Reflections for dynamic command binding">
       <created>1677132958933</created>
@@ -249,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677154169897</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="IO finished, reformatting growable.java and Tile.java">
+      <created>1677327557402</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1677327557402</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,7 +240,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implemented Java Reflections for dynamic command binding" />
     <MESSAGE value="Basic IO implementation almost finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic IO implementation almost finished" />
+    <MESSAGE value="IO finished, reformatting growable.java and Tile.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="IO finished, reformatting growable.java and Tile.java" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

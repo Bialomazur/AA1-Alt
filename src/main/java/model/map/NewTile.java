@@ -25,15 +25,14 @@ public abstract class NewTile {
         this.tileType = type;
     }
 
-    public abstract void putGrowable(Growable growable);
+    public abstract void putGrowable(final Growable growable);
 
-    public abstract Growable takeGrowable(Growable growable, int quantity);
+    public abstract Growable takeGrowable(final Growable growable, final int quantity);
 
     public abstract int getGrowablePopulation();
 
     public boolean plantTypeAllowed(Growable growable) {
         return this.tileType.getAllowedPlants().contains(growable.getPlantType());
     }
-
 
 }
