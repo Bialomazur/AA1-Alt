@@ -12,6 +12,7 @@ public enum BiotopeType {
     LARGE_FIELD(Set.of(PlantType.SALAD, PlantType.TOMATO, PlantType.CARROT)),
     LARGE_FOREST(Set.of(PlantType.MUSHROOM, PlantType.CARROT, PlantType.TOMATO));
 
+
     private final Set<PlantType> allowedPlants;
 
     BiotopeType(final Set<PlantType> allowedPlants) {

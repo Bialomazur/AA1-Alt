@@ -30,7 +30,9 @@ class ShowBarnCommandTest {
 
     @Test
     void goldAmountBiggerThanTotalGrowableCount() {
-        final Game game = new Game(5000, 100000000);
+        final Game game = new Game();
+        game.setStartingGold(5000);
+        game.setWinningGold(100000000);
         game.addPlayer("Player 1");
 
         GameCommand command = new ShowBarnCommand(game);
@@ -58,7 +60,9 @@ class ShowBarnCommandTest {
 
     @Test
     void goldAmountSmallerThanTotalGrowableCount() {
-        final Game game = new Game(5, 100000000);
+        final Game game = new Game();
+        game.setStartingGold(5);
+        game.setWinningGold(100000000);
         game.addPlayer("Player 1");
 
         GameCommand command = new ShowBarnCommand(game);
@@ -87,7 +91,9 @@ class ShowBarnCommandTest {
 
     @Test
     void barnWithDifferingGrowableCounts() {
-        final Game game = new Game(5, 100000000);
+        final Game game = new Game();
+        game.setStartingGold(5);
+        game.setWinningGold(100000000);
         game.addPlayer("Player 1");
 
         GameCommand command = new ShowBarnCommand(game);
@@ -121,7 +127,9 @@ class ShowBarnCommandTest {
 
     @Test
     void barnWithoutSomeGrowablesAndNotEmpty() {
-        final Game game = new Game(5, 100000000);
+        final Game game = new Game();
+        game.setStartingGold(5);
+        game.setWinningGold(100000000);
         game.addPlayer("Player 1");
 
         GameCommand command = new ShowBarnCommand(game);
@@ -152,7 +160,9 @@ class ShowBarnCommandTest {
 
     @Test
     void emptyBarn() {
-        final Game game = new Game(5, 100000000);
+        final Game game = new Game();
+        game.setStartingGold(5);
+        game.setWinningGold(100000000);
         game.addPlayer("Player 1");
 
         GameCommand command = new ShowBarnCommand(game);

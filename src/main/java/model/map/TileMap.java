@@ -7,10 +7,6 @@ public class TileMap {
     private final Barn barn = new Barn(); //TODO: Consider using a collection here for better extensibility
     private final Set<CultivableTile> cultivableTiles = new HashSet<>();
 
-    public void buyCultivableTile(final int x, final int y) {
-
-    }
-
     public void addCultivableTile(final CultivableTile tile) {
         this.cultivableTiles.add(tile);
     }
@@ -22,6 +18,15 @@ public class TileMap {
             }
         }
         return null; //TODO: Consider throwing an exception here or returning an empty tile
+    }
+
+    public boolean hasTileAt(final int x, final int y) {
+        for (final Tile tile : this.cultivableTiles) {
+            if (tile.getX() == x && tile.getY() == y) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // TODO: Make sure to clarify that a shallow copy is needed here!
@@ -36,14 +41,6 @@ public class TileMap {
     }
 
 
-    //TODO: Consider moving / reformating this method - espcecially expcetion throwing
-    public void buyTile(final int x, final int y) {
-        for (final Tile tile : this.cultivableTiles) {
-            if (tile.getX() == x && tile.getY() == y) {
-                throw new IllegalArgumentException("Tile at given coordinate already in Possession.");
-            }
-        }
-    }
 
     public void init() {
         this.barn.init();

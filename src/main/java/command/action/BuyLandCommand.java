@@ -29,9 +29,9 @@ public class BuyLandCommand extends GameCommand {
     }
 
     @Override
-    protected void validateArgumentsContent(List<String> args) {
+    protected void validateArgumentsContent(final List<String> args) {
         boolean validCorrdinates = true;
-        for (final String coordinate : this.getArguments()) {
+        for (final String coordinate : this.getArgs()) {
             try {
                 Integer.parseInt(coordinate);
             } catch (final NumberFormatException e) {
@@ -46,8 +46,8 @@ public class BuyLandCommand extends GameCommand {
 
     @Override
     public void execute() {
-        final int xCoordinate = Integer.parseInt(this.getArguments().get(X_COORDINATE_INDEX));
-        final int yCoordinate = Integer.parseInt(this.getArguments().get(Y_COORDINATE_INDEX));
+        final int xCoordinate = Integer.parseInt(this.getArgs().get(X_COORDINATE_INDEX));
+        final int yCoordinate = Integer.parseInt(this.getArgs().get(Y_COORDINATE_INDEX));
         final Player currentPlayer = this.getGame().getCurrentPlayer();
 
         //TODO: Figure out how to fulfill the transaction

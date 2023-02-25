@@ -12,28 +12,33 @@ public class GameCommandFactory {
     private final Game game;
     private final Map<String, GameCommand> registeredCommands = new HashMap<>();
 
-    public GameCommand getGameCommand(String command, List<String> args) {
+    public GameCommand buildCommand(final String command, final List<String> args) {
         GameCommand gameCommand = new EmptyGameCommand(this.game);
 
-        for (Entry<String, GameCommand> entry : registeredCommands.entrySet()) {
+        for (final Entry<String, GameCommand> entry : this.registeredCommands.entrySet()) {
             if (entry.getKey().equals(command)) {
                 gameCommand = entry.getValue();
+                gameCommand.setArgs(args);
             }
         }
 
-        gameCommand.setArgs(args);
         return gameCommand;
     }
 
-    public GameCommandFactory(Game game) {
+    public GameCommandFactory(final Game game) {
         this.game = game;
     }
 
-    public void registerCommand(String command, GameCommand gameCommand) {
+    public void register(final String command, final GameCommand gameCommand) {
         this.registeredCommands.put(command, gameCommand);
     }
 
-    public Map<String, GameCommand> getRegisteredCommands() {
-        return Collections.unmodifiableMap(this.registeredCommands);
+    public void unregister(final String command) {
+        this.registeredCommands.remove(command);
+    }
+
+
+    public boolean isRegistered(final String command) {
+        return this.registeredCommands.containsKey(command);
     }
 }

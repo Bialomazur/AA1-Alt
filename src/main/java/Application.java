@@ -1,20 +1,26 @@
+import io.session.ConfigurationSession;
+import io.session.PlaySession;
+import model.Game;
+
+import java.util.Scanner;
 
 public class Application {
-    private static final String HELLO_WORLD = "Hello world!";
+    private static final String NO_ARGUMENTS_EXPECTED = "No arguments expected";
 
-    private void basedScanning() {
+    public static void main(final String[] args) {
 
+        if (args.length != 0) {
+            System.out.println(NO_ARGUMENTS_EXPECTED);
+            return;
+        }
+
+        final Scanner scanner = new Scanner(System.in);
+        final Game game = new Game();
+        final ConfigurationSession configurationSession = new ConfigurationSession(game, scanner);
+        configurationSession.start();
+
+        if (!configurationSession.hasBeenTerminatedPrematurily()) {
+            new PlaySession(game, scanner).start();
+        }
     }
-    public static void main(String[] args) {
-        System.out.println(HELLO_WORLD);
-
-
-    }
-
-
-
-
-
-
-
 }

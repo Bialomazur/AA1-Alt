@@ -9,8 +9,9 @@ package model.growable;
  * inside of a given plant-type in the future.
  * <p>
  * Furthermore given that for instance a mushroom is a fungus, a tomato is a fruit, and a carrot is a root,
- * those organisms are not only different in their appearance, but also in their behavior, and therefore longterm,
- * the requirement for dynamically implemented distinctions between those, isn't merely probable, but inevitable.
+ * those organisms are not only different in their type of species, appearance, but also in their behavior,
+ * and therefore longterm, the requirement for dynamically implemented distinctions between those,
+ * isn't merely probable, but inevitable.
  *
  * @author uejxk
  * @version 1.0

@@ -5,11 +5,12 @@ import model.Game;
 
 import java.util.List;
 
-public class ShowMapCommand extends GameCommand {
+public class ShowMarketCommand extends GameCommand {
+
     private static final int MIN_ARGUMENT_COUNT = 0;
     private static final int MAX_ARGUMENT_COUNT = 0;
 
-    public ShowMapCommand(Game game) {
+    public ShowMarketCommand(final Game game) {
         super(game);
     }
 
@@ -23,9 +24,8 @@ public class ShowMapCommand extends GameCommand {
         return MAX_ARGUMENT_COUNT;
     }
 
-
     @Override
-    protected void validateArgumentsContent(List<String> args) {
+    protected void validateArgumentsContent(final List<String> args) {
 
     }
 

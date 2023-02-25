@@ -11,7 +11,7 @@ import java.util.Map;
 
 public abstract class GameCommand {
     private final Game game;
-    private final List<String> arguments = new ArrayList<>();
+    private final List<String> args = new ArrayList<>();
     private String output = Output.EMPTY_OUTPUT.format();
     private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments";
     private final Map<Integer, ArgumentValidator> argumentValidators = new HashMap<>();
@@ -23,8 +23,8 @@ public abstract class GameCommand {
 
     protected abstract int getMaxArgumentCount();
 
-    protected List<String> getArguments() {
-        return Collections.unmodifiableList(this.arguments); //TODO: Check if package java.util.Collections is allowed
+    protected List<String> getArgs() {
+        return Collections.unmodifiableList(this.args); //TODO: Check if package java.util.Collections is allowed
     }
 
     protected Game getGame() {
@@ -48,8 +48,8 @@ public abstract class GameCommand {
 
         //TODO: fishy because the commands validate arguments themselves and throw according exceptions
         this.validateArgumentsContent(args);
-        this.arguments.clear();
-        this.arguments.addAll(args);
+        this.args.clear();
+        this.args.addAll(args);
     }
 
     protected abstract void validateArgumentsContent(List<String> args);

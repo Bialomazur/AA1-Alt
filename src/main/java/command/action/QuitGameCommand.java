@@ -1,4 +1,4 @@
-package command.flow;
+package command.action;
 
 import command.GameCommand;
 import model.Game;
@@ -24,7 +24,7 @@ public class QuitGameCommand extends GameCommand {
     }
 
     @Override
-    protected void validateArgumentsContent(List<String> args) {
+    protected void validateArgumentsContent(final List<String> args) {
 
     }
 
