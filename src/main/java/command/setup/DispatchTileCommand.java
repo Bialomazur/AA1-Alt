@@ -1,7 +1,7 @@
 package command.setup;
 
 import command.GameCommand;
-import model.Game;
+import model.game.Game;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class DispatchTileCommand extends GameCommand {
     private static final String INVALID_X_COORDINATE = "Invalid x-coordinate.";
     private static final String INVALID_Y_COORDINATE = "Invalid y-coordinate.";
 
-    protected DispatchTileCommand(Game game) {
+    protected DispatchTileCommand(final Game game) {
         super(game);
     }
 

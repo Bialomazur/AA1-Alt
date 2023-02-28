@@ -1,11 +1,12 @@
 package command;
 
 import command.info.ShowBarnCommand;
-import model.Game;
+import model.game.Game;
 import model.growable.Growable;
 import model.growable.PlantType;
 import model.map.Barn;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,30 +18,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ShowBarnCommandTest {
 
     private static final List<String> ARGS = new ArrayList<>();
+    private static Game game;
 
-
-    @BeforeAll
-    static void init() {
+    @BeforeEach
+    void init() {
+        game = new Game();
+        game.createLobby(1);
     }
 
 
-    private void log(String message) {
+    private void log(final String message) {
         System.out.println(message);
     }
 
     @Test
     void goldAmountBiggerThanTotalGrowableCount() {
-        final Game game = new Game();
         game.setStartingGold(5000);
         game.setWinningGold(100000000);
         game.addPlayer("Player 1");
 
-        GameCommand command = new ShowBarnCommand(game);
+        final GameCommand command = new ShowBarnCommand(game);
         command.setArgs(ARGS);
         game.start();
 
-        for (PlantType plantType : PlantType.values()) {
-            game.getPlayerById(1).getTileMap().getBarn().storeGrowable(new Growable(plantType, 99), 99);
+        for (final PlantType plantType : PlantType.values()) {
+            game.getPlayerById(1).getTileMap().getBarn().putGrowable(new Growable(plantType, 99));
         }
 
         final String correctResult = "Barn (spoils in 6 turns)\n" +
@@ -54,23 +56,22 @@ class ShowBarnCommandTest {
                 "Gold:      5000";
 
         command.execute();
-        String result = command.flush();
+        final String result = command.flush();
         assertEquals(correctResult, result);
     }
 
     @Test
     void goldAmountSmallerThanTotalGrowableCount() {
-        final Game game = new Game();
         game.setStartingGold(5);
         game.setWinningGold(100000000);
         game.addPlayer("Player 1");
 
-        GameCommand command = new ShowBarnCommand(game);
+        final GameCommand command = new ShowBarnCommand(game);
         command.setArgs(ARGS);
         game.start();
 
-        for (PlantType plantType : PlantType.values()) {
-            game.getPlayerById(1).getTileMap().getBarn().storeGrowable(new Growable(plantType, 249), 249);
+        for (final PlantType plantType : PlantType.values()) {
+            game.getPlayerById(1).getTileMap().getBarn().putGrowable(new Growable(plantType, 249));
         }
 
         final String correctResult = "Barn (spoils in 6 turns)\n" +
@@ -84,31 +85,30 @@ class ShowBarnCommandTest {
                 "Gold:         5";
 
         command.execute();
-        String result = command.flush();
+        final String result = command.flush();
         assertEquals(correctResult, result);
     }
 
 
     @Test
     void barnWithDifferingGrowableCounts() {
-        final Game game = new Game();
         game.setStartingGold(5);
         game.setWinningGold(100000000);
         game.addPlayer("Player 1");
 
-        GameCommand command = new ShowBarnCommand(game);
+        final GameCommand command = new ShowBarnCommand(game);
         command.setArgs(ARGS);
         game.start();
 
-        Growable carrot = new Growable(PlantType.CARROT, 99);
-        Growable mushroom = new Growable(PlantType.MUSHROOM, 99);
-        Growable salad = new Growable(PlantType.SALAD, 99);
-        Growable tomato = new Growable(PlantType.TOMATO, 99);
+        final Growable carrot = new Growable(PlantType.CARROT, 99);
+        final Growable mushroom = new Growable(PlantType.MUSHROOM, 99);
+        final Growable salad = new Growable(PlantType.SALAD, 49);
+        final Growable tomato = new Growable(PlantType.TOMATO, 49);
 
-        game.getCurrentPlayer().getTileMap().getBarn().storeGrowable(carrot, 99);
-        game.getCurrentPlayer().getTileMap().getBarn().storeGrowable(mushroom, 99);
-        game.getCurrentPlayer().getTileMap().getBarn().storeGrowable(salad, 49);
-        game.getCurrentPlayer().getTileMap().getBarn().storeGrowable(tomato, 49);
+        game.getCurrentPlayer().getTileMap().getBarn().putGrowable(carrot);
+        game.getCurrentPlayer().getTileMap().getBarn().putGrowable(mushroom);
+        game.getCurrentPlayer().getTileMap().getBarn().putGrowable(salad);
+        game.getCurrentPlayer().getTileMap().getBarn().putGrowable(tomato);
 
         final String correctResult = "Barn (spoils in 6 turns)\n" +
                 "carrots:   100\n" +
@@ -120,31 +120,28 @@ class ShowBarnCommandTest {
                 "Gold:        5";
 
         command.execute();
-        String result = command.flush();
+        final String result = command.flush();
         assertEquals(correctResult, result);
     }
 
 
     @Test
     void barnWithoutSomeGrowablesAndNotEmpty() {
-        final Game game = new Game();
         game.setStartingGold(5);
         game.setWinningGold(100000000);
         game.addPlayer("Player 1");
 
-        GameCommand command = new ShowBarnCommand(game);
+        final GameCommand command = new ShowBarnCommand(game);
         command.setArgs(ARGS);
         game.start();
-        Barn barn = game.getCurrentPlayer().getTileMap().getBarn();
+        final Barn barn = game.getCurrentPlayer().getTileMap().getBarn();
         barn.spoil();
 
-        Growable carrot = new Growable(PlantType.CARROT, 999);
-        Growable mushroom = new Growable(PlantType.MUSHROOM, 999);
-        Growable salad = new Growable(PlantType.SALAD, 999);
-        Growable tomato = new Growable(PlantType.TOMATO, 999);
+        final Growable carrot = new Growable(PlantType.CARROT, 50);
+        final Growable mushroom = new Growable(PlantType.MUSHROOM, 100);
 
-        barn.storeGrowable(carrot, 50);
-        barn.storeGrowable(mushroom, 100);
+        barn.putGrowable(carrot);
+        barn.putGrowable(mushroom);
 
         final String correctResult = "Barn (spoils in 6 turns)\n" +
                 "mushrooms: 100\n" +
@@ -154,18 +151,17 @@ class ShowBarnCommandTest {
                 "Gold:        5";
 
         command.execute();
-        String result = command.flush();
+        final String result = command.flush();
         assertEquals(correctResult, result);
     }
 
     @Test
     void emptyBarn() {
-        final Game game = new Game();
         game.setStartingGold(5);
         game.setWinningGold(100000000);
         game.addPlayer("Player 1");
 
-        GameCommand command = new ShowBarnCommand(game);
+        final GameCommand command = new ShowBarnCommand(game);
         command.setArgs(ARGS);
         game.start();
         game.getCurrentPlayer().getTileMap().getBarn().spoil();
@@ -174,7 +170,7 @@ class ShowBarnCommandTest {
                 "Gold: 5";
 
         command.execute();
-        String result = command.flush();
+        final String result = command.flush();
         assertEquals(correctResult, result);
     }
 }

@@ -2,6 +2,6 @@ package model.event;
 
 public enum EventType {
     BARN_HAS_SPOILED,
-    VEGETABLES_GROWN,
+    GROWABLE_POPULATION_INCREASED,
     NOTHING,;
 }

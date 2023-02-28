@@ -1,11 +1,9 @@
 package model.market;
 
-import model.Player;
+import model.game.Player;
 import model.growable.PlantType;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class Market {
@@ -14,19 +12,19 @@ public class Market {
     public Market() {
     }
 
-    public int getGrowablePrice(PlantType plantType) {
+    public int getGrowablePrice(final PlantType plantType) {
         return 0;
     }
 
-    public void addPriceIndicator(PriceIndicator priceIndicator) {
+    public void addPriceIndicator(final PriceIndicator priceIndicator) {
         this.priceIndicators.add(priceIndicator);
     }
 
-    public void buy(PlantType plantType, Player player) {
+    public void buy(final PlantType plantType, final Player player) {
 
     }
 
-    public void sell(PlantType plantType, Player player) {
+    public void sell(final PlantType plantType, final Player player) {
 
     }
 

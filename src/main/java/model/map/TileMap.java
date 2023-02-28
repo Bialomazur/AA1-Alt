@@ -1,28 +1,48 @@
 package model.map;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public class TileMap {
-    private final Barn barn = new Barn(); //TODO: Consider using a collection here for better extensibility
-    private final Set<CultivableTile> cultivableTiles = new HashSet<>();
+    private static final int X_COORDINATE_INDEX = 0;
+    private static final int Y_COORDINATE_INDEX = 1;
+    private static final int[] BARN_COORDINATES = new int[] {0, 0};
+    private final Barn barn = new Barn(BARN_COORDINATES[X_COORDINATE_INDEX], BARN_COORDINATES[Y_COORDINATE_INDEX]);
+    private final List<Tile> tiles = new ArrayList<>();
 
-    public void addCultivableTile(final CultivableTile tile) {
-        this.cultivableTiles.add(tile);
+    //DEBUG: make sure to explain why this does NOT pose a magic number violation!
+    private final Map<int[], Biotope> initialCultivableTiles = Map.of(
+            new int[] {-1, 0}, Biotope.GARDEN,
+            new int[] {1, 0}, Biotope.GARDEN,
+            new int[] {0, 1}, Biotope.FIELD
+    );
+
+    private static final String MAP_HAS_NO_TILE_AT = "Map has no tile at (%d, %d).";
+
+
+    public void addTile(final Tile tile) {
+        this.tiles.add(tile);
     }
 
-    public Tile getCultivableTileAt(final int x, final int y) {
-        for (final Tile tile : this.cultivableTiles) {
-            if (tile.getX() == x && tile.getY() == y) {
+    public void addAllTiles(final Set<Tile> tiles) {
+        this.tiles.addAll(tiles);
+    }
+
+    public Tile getTileAt(final int xCoordinate, final int yCoordinate) {
+        for (final Tile tile : this.tiles) {
+            if (tile.getxCoordinate() == xCoordinate && tile.getyCoordinate() == yCoordinate) {
                 return tile;
             }
         }
-        return null; //TODO: Consider throwing an exception here or returning an empty tile
+        throw new IllegalArgumentException(String.format(MAP_HAS_NO_TILE_AT, xCoordinate, yCoordinate));
     }
 
-    public boolean hasTileAt(final int x, final int y) {
-        for (final Tile tile : this.cultivableTiles) {
-            if (tile.getX() == x && tile.getY() == y) {
+    public boolean hasTileAt(final int xCoordinate, final int yCoordinate) {
+        for (final Tile tile : this.tiles) {
+            if (tile.getxCoordinate() == xCoordinate && tile.getyCoordinate() == yCoordinate) {
                 return true;
             }
         }
@@ -30,20 +50,24 @@ public class TileMap {
     }
 
     // TODO: Make sure to clarify that a shallow copy is needed here!
-    public Set<CultivableTile> getCultivableTiles() {
-        final Set<CultivableTile> shallowCopy = new HashSet<>();
-        shallowCopy.addAll(this.cultivableTiles);
-        return shallowCopy;
-    }
 
     public Barn getBarn() {
         return this.barn;
     }
 
-
-
-    public void init() {
-        this.barn.init();
-        
+    public List<Tile> getTiles() {
+        return new ArrayList<>(this.tiles);
     }
+    public void init() {
+        for (final Entry<int[], Biotope> entry : this.initialCultivableTiles.entrySet()) {
+            final int xCoordinate = entry.getKey()[X_COORDINATE_INDEX];
+            final int yCoordinate = entry.getKey()[Y_COORDINATE_INDEX];
+            final Biotope biotope = entry.getValue();
+            this.tiles.add(new CultivableTile(biotope, xCoordinate, yCoordinate));
+        }
+
+        this.tiles.add(this.barn);
+    }
+
+
 }

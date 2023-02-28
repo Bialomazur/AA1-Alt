@@ -5,12 +5,66 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86753ab7-fa7e-4396-8047-57bb02533331" name="Changes" comment="IO finished, reformatting growable.java and Tile.java">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/map/NewCultivableTile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/game/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/game/Lobby.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/map/TileCoordinate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/time/Updateable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/io/CommandParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/growable/Growable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/growable/Growable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/EmptyGameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/EmptyGameCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/GameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/GameCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/GameCommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/GameCommandFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/MetaCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/MetaCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/Output.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/Output.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/action/BuyGrowableCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/action/BuyGrowableCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/action/BuyLandCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/action/BuyLandCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/action/EndTurnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/action/EndTurnCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/action/HarvestCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/action/HarvestCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/action/PlantGrowableCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/action/PlantGrowableCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/action/QuitGameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/action/QuitGameCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/action/SellGrowableCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/action/SellGrowableCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/argument/ArgumentValidator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/argument/MapCoordinateValidator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/info/FlushEventQueueCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/info/FlushEventQueueCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/info/ShowBarnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/info/ShowBarnCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/info/ShowBoardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/info/ShowBoardCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/info/ShowMarketCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/info/ShowMarketCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/setup/AddPlayerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/setup/AddPlayerCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/setup/DispatchTileCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/setup/DispatchTileCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/setup/SetPlayerCountCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/setup/SetPlayerCountCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/setup/SetStartingGoldCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/setup/SetStartingGoldCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/setup/SetWinningGoldCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/setup/SetWinningGoldCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/setup/ShuffleTilesCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/setup/SetTileSeedCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/session/ConfigurationSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/session/ConfigurationSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/session/PlaySession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/session/PlaySession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/session/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/session/Session.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/event/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/event/EventLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/event/EventLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/event/EventType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/event/EventType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Barn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Barn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/NewBarn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/NewBarn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/NewTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/NewTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/BiotopeType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/CultivableTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/CultivableTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/NewBarn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/NewCultivableTile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/NewTile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/TileDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/TileDispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/TileMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/TileMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/TileType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Biotope.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/market/Market.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/market/Market.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/Clock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/time/Clock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/Countdown.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/CountdownClock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/CultivableMapCountdown.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/GrowthCountdown.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/MasterClock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/time/MasterClock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/time/SpoilCountdown.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/command/GameCommandFactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/command/GameCommandFactoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/command/ShowBarnCommandTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/command/ShowBarnCommandTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/PlaySessionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/PlaySessionTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,10 +74,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="package-info" />
         <option value="JUnit5 Test Class" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -46,26 +100,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "last_opened_file_path": "/home/outlaw/IdeaProjects/AA1-Alt/src/main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/outlaw/IdeaProjects/AA1-Alt/src/main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.toDoOptions&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main" />
@@ -154,37 +208,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SessionTest.basic" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ShowBarnCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AA1-Alt" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="io.log.*" />
+          <option name="PATTERN" value="command.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="io" />
-      <option name="MAIN_CLASS_NAME" value="io.SessionTest" />
-      <option name="METHOD_NAME" value="basic" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="command" />
+      <option name="MAIN_CLASS_NAME" value="command.ShowBarnCommandTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="Application.default" />
+      <item itemvalue="JUnit.ShowBarnCommandTest" />
       <item itemvalue="JUnit.PlaySessionTest" />
       <item itemvalue="JUnit.PlaySessionTest.basic" />
       <item itemvalue="JUnit.PlaySessionTest.interactiveTest" />
       <item itemvalue="JUnit.PlaySessionTest.testRecoginitionOfRegisteredCommands" />
-      <item itemvalue="JUnit.SessionTest.basic" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ShowBarnCommandTest" />
         <item itemvalue="JUnit.PlaySessionTest.interactiveTest" />
         <item itemvalue="JUnit.PlaySessionTest" />
         <item itemvalue="JUnit.PlaySessionTest.testRecoginitionOfRegisteredCommands" />
         <item itemvalue="JUnit.PlaySessionTest.basic" />
-        <item itemvalue="JUnit.SessionTest.basic" />
       </list>
     </recent_temporary>
   </component>
@@ -198,6 +251,7 @@
       <updated>1677014933890</updated>
       <workItem from="1677014934903" duration="11870000" />
       <workItem from="1677033362940" duration="77379000" />
+      <workItem from="1677423588949" duration="55564000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented Java Reflections for dynamic command binding">
       <created>1677132958933</created>
@@ -242,6 +296,18 @@
     <MESSAGE value="Basic IO implementation almost finished" />
     <MESSAGE value="IO finished, reformatting growable.java and Tile.java" />
     <option name="LAST_COMMIT_MESSAGE" value="IO finished, reformatting growable.java and Tile.java" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="NONE" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/command/info/ShowBoardCommand.java</url>
+          <line>181</line>
+          <log-expression expression="result" language="JAVA" />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,8 +1,8 @@
 package command.action;
 
 import command.GameCommand;
-import model.Game;
-import model.Player;
+import model.game.Game;
+import model.game.Player;
 
 import java.util.List;
 

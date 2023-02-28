@@ -1,7 +1,7 @@
 package command.info;
 
 import command.GameCommand;
-import model.Game;
+import model.game.Game;
 
 import java.util.List;
 

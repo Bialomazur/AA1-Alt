@@ -1,7 +1,7 @@
 package command.setup;
 
 import command.GameCommand;
-import model.Game;
+import model.game.Game;
 
 import java.util.List;
 
@@ -45,6 +45,6 @@ public class SetPlayerCountCommand extends GameCommand {
 
     @Override
     public void execute() {
-        this.getGame().setPlayerCount(Integer.parseInt(this.getArgs().get(PLAYER_COUNT_ARG_INDEX)));
+        this.getGame().createLobby(Integer.parseInt(this.getArgs().get(PLAYER_COUNT_ARG_INDEX)));
     }
 }

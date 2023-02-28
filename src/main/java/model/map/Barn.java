@@ -1,5 +1,7 @@
 package model.map;
 
+import model.event.Event;
+import model.event.EventType;
 import model.growable.Growable;
 import model.growable.PlantType;
 
@@ -7,105 +9,118 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Barn extends Tile {
-    private final Set<Growable> growables = new HashSet<>();
-    private static final int MIN_UNITS_STORED = 0;
-    private static final int MIN_STORABLE_UNITS = 1;
-    private static final int DEFAULT_UNITS_STORED = 1;
+public class Barn extends Tile{
+    private static final String GROWABLE_NOT_IN_STORE = "Cannot take a growable that is not stored.";
+    private static final String NOT_ENOUGH_UNITS_STORED = "Not enough %s stored.";
+    private static final int ROUNDS_UNTIL_SPOIL = 6;
+    private final Set<Growable> storage = new HashSet<>();
+    private static final int INITIAL_STORAGE_QUANTITIES = 1;
 
-    public void spoil() {
-        this.growables.clear();
-    }
-
-    public boolean isEmpty() {
-        return growables.isEmpty();
-    }
-
-    private void addUnitsToExistingGrowable(final Growable growable, final int amount) {
-        for (Growable barnGrowable : this.growables) {
-            if (barnGrowable.getPlantType() == growable.getPlantType()) {
-                barnGrowable.setPopulation(barnGrowable.getPopulation() + amount);
-                return;
-            }
-        }
-    }
-
-    private boolean hasGrowable(final Growable growable) {
-        for (Growable barnGrowable : this.growables) {
-            if (barnGrowable.getPlantType() == growable.getPlantType()) {
-                return true;
-            }
-        }
-        return false;
+    public Barn(final int xCoordinate, final int yCoordinate) {
+        super(xCoordinate, yCoordinate, Biotope.BARN);
     }
 
     private Growable getStoredGrowable(final Growable growable) {
-        for (Growable barnGrowable : this.growables) {
-            if (barnGrowable.getPlantType() == growable.getPlantType()) {
+        for (final Growable barnGrowable : this.storage) {
+            if (barnGrowable.equals(growable)) {
                 return barnGrowable;
             }
         }
-        return null;
+        throw new IllegalArgumentException(GROWABLE_NOT_IN_STORE);
     }
 
-    public void storeGrowable(final Growable growable, final int amount) {
-        if (growable.getPopulation() < MIN_STORABLE_UNITS) {
-            throw new IllegalArgumentException("Cannot store a Growable with a population of less than 1.");
-        }
+    public Set<Growable> getAllStoredGrowables() {
+        return Collections.unmodifiableSet(this.storage);
+    }
 
-        if (growable.getPopulation() < amount) {
-            throw new IllegalArgumentException("Cannot store more units than the Growable has.");
-        }
-
-        if (hasGrowable(growable)) {
-            addUnitsToExistingGrowable(growable, amount);
+    @Override
+    public void putGrowable(final Growable growable) {
+        if (this.storage.contains(growable)) {
+            final int unitsInStoree = this.getStoredGrowable(growable).getPopulation() + growable.getPopulation();
+            this.getStoredGrowable(growable).setPopulation(unitsInStoree);
         } else {
-            this.growables.add(new Growable(growable.getPlantType(), amount));
+            this.storage.add(new Growable(growable));
         }
-
-        growable.setPopulation(growable.getPopulation() - amount);
+        growable.kill();
     }
 
-    // TODO: Make sure that if the player sells multiple growables, ALL of them are FIRST removed from the barn and THEN added to the player's gold amount.
-    // TODO: This is to ensure the atomicity of the market transaction, that if an exception is thrown, the player's gold amount is not changed.
-    // TODO: Consider using PlantType instead of Growable as the parameter.
-    public void removeGrowable(final Growable growable, final int amount) {
-        if (amount < MIN_UNITS_STORED) {
-            throw new IllegalArgumentException("Cannot remove a negative amount of units.");
+    @Override
+    public Growable takeGrowable(final Growable growable, final int quantity) {
+        final Growable storedGrowable = this.getStoredGrowable(growable);
+        if (storedGrowable.getPopulation() < quantity) {
+            throw new IllegalArgumentException(NOT_ENOUGH_UNITS_STORED.formatted(growable.getPluralName()));
         }
-        if (!hasGrowable(growable)) {
-            throw new IllegalArgumentException("Cannot remove a Growable that is not in the barn.");
+        storedGrowable.setPopulation(storedGrowable.getPopulation() - quantity);
+
+        if (!storedGrowable.isAlive()) {
+            this.storage.remove(storedGrowable);
         }
 
-        Growable storedGrowable = getStoredGrowable(growable);  //TODO: Consider creating an empty Growable object receive from getStoredGrowable when the Growable is not in the barn.
-        if (storedGrowable.getPopulation() < amount) {
-            throw new IllegalArgumentException("Cannot remove more units than the barn has.");
+        if (this.storage.isEmpty()) {
+            this.setRoundsPassedUntilUpdateAction(INITIAL_ROUNDS_PASSED);
         }
 
-        storedGrowable.setPopulation(storedGrowable.getPopulation() - amount);
-
-        if (storedGrowable.getPopulation() == MIN_UNITS_STORED) {
-            this.growables.remove(storedGrowable);
-        }
+        return new Growable(growable.getPlantType(), quantity);
     }
 
-    public Set<Growable> getInventory() {
-        return Collections.unmodifiableSet(this.growables);
+    @Override
+    public int getGrowablePopulation() {
+        int totalPopulation = 0;
+
+        for (final Growable growable : this.storage) {
+            totalPopulation += growable.getPopulation();
+        }
+
+        return totalPopulation;
     }
 
-    // TODO: Enhance for production
+    @Override
+    public boolean isEmpty() {
+        return this.storage.isEmpty();
+    }
+
+
+    //DEBUG: REFACTOR
+    @Override
+    public Event update() {
+        if (this.active()) {
+            this.setRoundsPassedUntilUpdateAction(this.getRoundsPassedUntilUpdateAction() + ROUNDS_PASSED_INCREMENT);
+        }
+
+        if (this.getRoundsPassedUntilUpdateAction() == ROUNDS_UNTIL_SPOIL) {
+            final int growablesToSpoil = this.getGrowablePopulation();
+            this.spoil();
+            this.setRoundsPassedUntilUpdateAction(INITIAL_ROUNDS_PASSED);
+            return new Event(EventType.BARN_HAS_SPOILED, growablesToSpoil);
+        }
+
+        return new Event();
+    }
+
+    public void spoil() {
+        this.storage.clear();
+    }
+
+    @Override
+    public boolean active() {
+        return !this.storage.isEmpty();
+    }
+
     public void init() {
-        for (PlantType plantType : PlantType.values()) {
-            Growable growable = new Growable(plantType, DEFAULT_UNITS_STORED);
-            this.growables.add(growable);
+        for (final PlantType plantType : PlantType.values()) {
+            this.storage.add(new Growable(plantType, INITIAL_STORAGE_QUANTITIES));
         }
     }
 
-    public int getTotalUnitsStored() {
-        int totalUnitsStored = 0;
-        for (Growable growable : this.growables) {
-            totalUnitsStored += growable.getPopulation();
-        }
-        return totalUnitsStored;
+    //DEBUG: REFACTOR
+    @Override
+    public int getUpdatesLeftUntilAction() {
+        return ROUNDS_UNTIL_SPOIL - this.getRoundsPassedUntilUpdateAction();
+    }
+
+    @Override
+    public String toString() {
+        final String countdown = this.active() ? this.getUpdatesLeftUntilAction() + " " : "  ";
+        return "     " + "\n" + " B " + countdown + "\n" + "     ";
     }
 }

@@ -2,7 +2,7 @@ package io;
 
 import io.session.PlaySession;
 import io.session.Session;
-import model.Game;
+import model.game.Game;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;

@@ -1,7 +1,7 @@
 package command.action;
 
 import command.GameCommand;
-import model.Game;
+import model.game.Game;
 
 import java.util.List;
 
@@ -44,6 +44,6 @@ public class EndTurnCommand extends GameCommand {
             throw new IllegalStateException(GAME_NOT_RUNNING);
         }
 
-        this.getGame().endTurn();
+        this.getGame().getMasterClock().tick();
     }
 }

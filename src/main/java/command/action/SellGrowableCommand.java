@@ -1,12 +1,12 @@
 package command.action;
 
 import command.GameCommand;
-import model.Game;
+import model.game.Game;
 
 import java.util.List;
 
 public class SellGrowableCommand extends GameCommand {
-    public SellGrowableCommand(Game game) {
+    public SellGrowableCommand(final Game game) {
         super(game);
     }
 
@@ -21,7 +21,7 @@ public class SellGrowableCommand extends GameCommand {
     }
 
     @Override
-    protected void validateArgumentsContent(List<String> args) {
+    protected void validateArgumentsContent(final List<String> args) {
 
     }
 

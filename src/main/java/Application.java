@@ -1,6 +1,6 @@
 import io.session.ConfigurationSession;
 import io.session.PlaySession;
-import model.Game;
+import model.game.Game;
 
 import java.util.Scanner;
 

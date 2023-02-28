@@ -1,12 +1,12 @@
 package command;
 
-import model.Game;
+import model.game.Game;
 
 import java.util.List;
 
 //TODO: Figure out how to realize meta commands
 public class MetaCommand extends GameCommand {
-    public MetaCommand(Game game) {
+    public MetaCommand(final Game game) {
         super(game);
     }
 
@@ -21,7 +21,7 @@ public class MetaCommand extends GameCommand {
     }
 
     @Override
-    protected void validateArgumentsContent(List<String> args) {
+    protected void validateArgumentsContent(final List<String> args) {
 
     }
 

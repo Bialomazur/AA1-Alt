@@ -1,10 +1,12 @@
 package command.setup;
 
 import command.GameCommand;
-import model.Game;
+import model.game.Game;
 
 import java.util.List;
 
+
+//TODO: Consider moving the dispatch of initial tiles and growables to a new  command class
 public class AddPlayerCommand extends GameCommand {
     private static final int MIN_ARGUMENT_COUNT = 1;
     private static final int MAX_ARGUMENT_COUNT = 1;

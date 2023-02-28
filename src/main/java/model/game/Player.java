@@ -1,4 +1,4 @@
-package model;
+package model.game;
 
 import model.map.TileMap;
 
@@ -8,9 +8,8 @@ public class Player {
     private final int id;
     private final TileMap tileMap = new TileMap();
 
-    public Player(final String name, final int gold, final int id) {
+    public Player(final String name, final int id) {
         this.name = name;
-        this.gold = gold;
         this.id = id;
     }
 

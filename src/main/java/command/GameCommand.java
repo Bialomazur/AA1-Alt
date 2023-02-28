@@ -1,7 +1,6 @@
 package command;
 
-import command.argument.ArgumentValidator;
-import model.Game;
+import model.game.Game;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +13,6 @@ public abstract class GameCommand {
     private final List<String> args = new ArrayList<>();
     private String output = Output.EMPTY_OUTPUT.format();
     private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments";
-    private final Map<Integer, ArgumentValidator> argumentValidators = new HashMap<>();
     protected GameCommand(final Game game) {
         this.game = game;
     }
@@ -36,7 +34,7 @@ public abstract class GameCommand {
     }
 
     public String flush() {
-        String result = this.output;
+        final String result = this.output;
         this.output = Output.EMPTY_OUTPUT.format();
         return result;
     }

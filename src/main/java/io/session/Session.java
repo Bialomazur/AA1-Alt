@@ -5,7 +5,7 @@ import command.GameCommandFactory;
 import io.log.ErrorLogger;
 import io.log.InfoLogger;
 import io.log.Logger;
-import model.Game;
+import model.game.Game;
 
 import java.util.List;
 import java.util.Scanner;

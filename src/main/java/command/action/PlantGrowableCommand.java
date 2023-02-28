@@ -1,13 +1,13 @@
 package command.action;
 
 import command.GameCommand;
-import model.Game;
+import model.game.Game;
 
 import java.util.List;
 
 public class PlantGrowableCommand extends GameCommand {
 
-    public PlantGrowableCommand(Game game) {
+    public PlantGrowableCommand(final Game game) {
         super(game);
     }
 
@@ -22,7 +22,7 @@ public class PlantGrowableCommand extends GameCommand {
     }
 
     @Override
-    protected void validateArgumentsContent(List<String> args) {
+    protected void validateArgumentsContent(final List<String> args) {
 
     }
 

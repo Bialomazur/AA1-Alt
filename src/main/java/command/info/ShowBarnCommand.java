@@ -2,8 +2,7 @@ package command.info;
 
 import command.GameCommand;
 import command.Output;
-import model.Game;
-import model.Player;
+import model.game.Game;
 import model.growable.Growable;
 import model.growable.GrowablePopulationSingularNameComparator;
 import model.growable.GrowablePluralNameLengthComparator;
@@ -19,7 +18,6 @@ import static java.lang.Math.max;
 public class ShowBarnCommand extends GameCommand {
     private static final int MIN_ARGUMENT_COUNT = 0;
     private static final int MAX_ARGUMENT_COUNT = 0;
-    private static final boolean NO_ARGUMENT_CONTENT_VERIFICATION = true;
     private static final int MIN_LINE_LENGTH = 0;
     private static final int LONGEST_SINGULAR_NAME_CRITERIA_INDEX = 0;
     private static final int DEFAULT_LINE_SEPARATOR_LENGTH = 1;
@@ -41,7 +39,7 @@ public class ShowBarnCommand extends GameCommand {
     }
 
     @Override
-    protected void validateArgumentsContent(List<String> args) {
+    protected void validateArgumentsContent(final List<String> args) {
         // No argument content verification
     }
 
@@ -54,43 +52,39 @@ public class ShowBarnCommand extends GameCommand {
         return totalGrowablesCount;
     }
 
-    private String buildInventoryReportLine(Growable growable, int lineLength) {
+    private String buildInventoryReportLine(final Growable growable, final int lineLength) {
         final StringBuilder line = new StringBuilder();
-        final int quantity = growable.getPopulation();
-        final String plantTypePluralLowerCase = growable.getPlantType().getPluralName().toLowerCase();
-
+        final int population = growable.getPopulation();
         line.append(Output.LINE_SEPARATOR.format());
-        line.append(plantTypePluralLowerCase);
+        line.append(growable.getPlantType().getPluralName().toLowerCase());
         line.append(Output.REPORT_ATTRIBUTE_POSTFIX.format());
 
-        while (line.length() < lineLength - String.valueOf(quantity).length()) {
+        while (line.length() < lineLength - String.valueOf(population).length()) {
             line.append(Output.REPORT_EMPTY_SPACE.format());
         }
-        line.append(Output.REPORT_EMPTY_SPACE.format());
 
-        StringBuilder populationString = new StringBuilder();
-        populationString.append(quantity);
+        line.append(Output.REPORT_EMPTY_SPACE.format()); //Extra space so that it has offset from the double-point prefix.
+        line.append(population);
 
-
-        line.append(growable.getPopulation());
         return line.toString();
     }
 
-    private String buildAttributeReportLine(String attribute, int value, int lineLength) {
+    private String buildAttributeReportLine(final String attribute, final int value, final int lineLength) {
         final StringBuilder line = new StringBuilder();
 
         line.append(attribute);
         line.append(Output.REPORT_ATTRIBUTE_POSTFIX.format());
 
-        while (line.length() < lineLength - String.valueOf(value).length()) {
+        //Do while because every attribute line has at least one space between the attribute-postfix and the value.
+        do {
             line.append(Output.REPORT_EMPTY_SPACE.format());
-        }
+        } while(line.length() < lineLength - String.valueOf(value).length());
 
         line.append(value);
         return line.toString();
     }
 
-    private String buildSeparatorLine(String separator, int lineLength) {
+    private String buildSeparatorLine(final String separator, final int lineLength) {
         final StringBuilder line = new StringBuilder();
         for (int i = 0; i < lineLength; i++) {
             line.append(separator);
@@ -118,37 +112,47 @@ public class ShowBarnCommand extends GameCommand {
         return alignDistanceTo + maxPluralNameLength + fixedOffset;
     }
 
-    private String buildInventoryReportSection(Barn barn, int lineLength) {
-        final StringBuilder line = new StringBuilder();
-
-        return line.toString();
-    }
-    //TODO: Consider renaming local variables to be more descriptive
-    @Override
-    public void execute() {
-        final StringBuilder output = new StringBuilder();
-        final Player player = this.getGame().getCurrentPlayer();
-
-        final int gold = player.getGold();
-        final int barnSpoilsIn = 6; // TODO: Figure out how to get the number of turns until the barn spoils
-        final Barn barn = player.getTileMap().getBarn();
-
-        final List<Growable> growables = new ArrayList<>(barn.getInventory());
-        Collections.sort(growables, new GrowablePopulationSingularNameComparator());
-        final int lineLength = this.getLineLength(growables, gold);
-
-        output.append(Output.BARN_SPOILS_IN.format(barnSpoilsIn));
-
-        for (final Growable growable : growables) {
-            output.append(this.buildInventoryReportLine(growable, lineLength));
+    private String buildInventoryReportLines(final List<Growable> inventory, final int lineLength) {
+        final StringBuilder lines = new StringBuilder();
+        for (final Growable growable : inventory) {
+            lines.append(this.buildInventoryReportLine(growable, lineLength));
         }
+        return lines.toString();
+    }
 
+    private String buildEmptyBarnReport(final int gold) {
+        final StringBuilder output = new StringBuilder();
+        output.append(Output.BARN.format());
+        output.append(this.buildSeparatorLine(Output.LINE_SEPARATOR.format(), DEFAULT_LINE_SEPARATOR_LENGTH));
+        output.append(this.buildAttributeReportLine(Output.GOLD.format(), gold, MIN_LINE_LENGTH));
+        return output.toString();
+    }
+
+    private String buildDefaultReport(final Barn barn, final int gold) {
+        final StringBuilder output = new StringBuilder();
+        final List<Growable> growables = new ArrayList<>(barn.getAllStoredGrowables());
+        final int lineLength = this.getLineLength(growables, gold);
+        final int barnSpoilsIn = barn.getUpdatesLeftUntilAction();
+
+        Collections.sort(growables, new GrowablePopulationSingularNameComparator());
+        output.append(Output.BARN_SPOILS_IN.format(barnSpoilsIn));
+        output.append(this.buildInventoryReportLines(growables, lineLength));
         output.append(this.buildSeparatorLine(Output.LINE_SEPARATOR.format(), DEFAULT_LINE_SEPARATOR_LENGTH));
         output.append(this.buildSeparatorLine(Output.REPORT_SECTION_SEPARATOR.format(), lineLength));
         output.append(this.buildSeparatorLine(Output.LINE_SEPARATOR.format(), DEFAULT_LINE_SEPARATOR_LENGTH));
-        output.append(this.buildAttributeReportLine(Output.BARN_OVERVIEW_FOOTER_SUM.format(), this.getTotalGrowablesCount(growables), lineLength));
+        output.append(this.buildAttributeReportLine(Output.SUM.format(), this.getTotalGrowablesCount(growables), lineLength));
         output.append(this.buildSeparatorLine(Output.LINE_SEPARATOR.format(), GOLD_LINE_SEPARATOR_LENGTH));
-        output.append(buildAttributeReportLine(Output.BARN_OVERVIEW_FOOTER_GOLD.format(), gold, lineLength));
-        this.setOutput(output.toString());
+        output.append(this.buildAttributeReportLine(Output.GOLD.format(), gold, lineLength));
+
+        return output.toString();
+    }
+
+    //TODO: Consider renaming local variables to be more descriptive
+    @Override
+    public void execute() {
+        final int gold = this.getGame().getCurrentPlayer().getGold();
+        final Barn barn = this.getGame().getCurrentPlayer().getTileMap().getBarn();
+
+        this.setOutput(barn.isEmpty() ? this.buildEmptyBarnReport(gold) : this.buildDefaultReport(barn, gold));
     }
 }

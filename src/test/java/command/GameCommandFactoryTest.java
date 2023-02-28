@@ -1,7 +1,5 @@
 package command;
 
-import command.setup.AddPlayerCommand;
-import model.Game;
 import org.junit.jupiter.api.Test;
 
 class GameCommandFactoryTest {

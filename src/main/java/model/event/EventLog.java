@@ -12,10 +12,10 @@ import java.util.Queue;
 // TODO: Perhaps find a more suiting name in order to make clear that an EventLog is only considered
 // TODO: to be responsible for countdown events.
 public class EventLog {
-    private final Map<Integer, Queue<String>> logEntries = new HashMap<>();
+    private final Map<Integer, Queue<Event>> logEntries = new HashMap<>();
 
-    public void addLogEntry(final int playerId, final String entry) {
-        this.logEntries.get(playerId).add(entry);
+    public void add(final int playerId, final Event event) {
+        this.logEntries.get(playerId).add(event);
     }
 
     public String flush(final int playerId) {

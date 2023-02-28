@@ -1,54 +1,140 @@
 package model.map;
 
+import model.event.Event;
+import model.event.EventType;
 import model.growable.Growable;
 
-public class CultivableTile extends Tile {
-    private BiotopeType biotopeType;
-    private Growable growable;
 
-    private static final int GROWABLE_PLANTATION_DECREASE = 1;
+public class CultivableTile extends Tile{
+    private Growable plantedGrowable;
+    private static final String TILE_ALREADY_CULTIVATED = "Tile already cultivated.";
+    private static final String TILE_NOT_CULTIVATED = "Tile not cultivated.";
+    private static final String NO_SUCH_GROWABLE_PLANTED = "No such growable planted on this tile.";
+    private static final String TOO_LITTLE_POPULATION = "Tile only has a population of %d.";
 
-    public void harvest(final int amount) {
-        this.growable.setPopulation(this.growable.getPopulation() - amount);
+    private static final int MIN_CULTIAVED_POPULATION = 0; //TODO: Explain why this is not a dry violation with @Growable#MIN_POPULATION!
+
+
+    public CultivableTile(final Biotope biotope, final int xCoordinate, final int yCoordinate) {
+        super(xCoordinate, yCoordinate, biotope);
     }
 
-    public void plant(final Growable growable) {
-        final boolean allowed = this.biotopeType.getAllowedPlants().contains(growable.getPlantType());
-        final boolean empty = this.growable == null; // TODO: Make sure to erase this null check!
+    @Override
+    public void putGrowable(final Growable growable) {
+        if (this.isEmpty()) {
+            throw new IllegalArgumentException(TILE_ALREADY_CULTIVATED);
+        }
+        this.plantedGrowable = new Growable(growable);
+        growable.kill();
+        this.setRoundsPassedUntilUpdateAction(INITIAL_ROUNDS_PASSED);
+    }
 
-        if (!allowed) {
-            throw new IllegalArgumentException("Plant type not allowed on this biotope");
+    @Override
+    public Growable takeGrowable(final Growable growable, final int quantity) {
+        if (!this.isEmpty()) {
+            throw new IllegalArgumentException(TILE_NOT_CULTIVATED);
+        }
+        if (!growable.equals(this.plantedGrowable)) {
+            throw new IllegalArgumentException(NO_SUCH_GROWABLE_PLANTED);
+        }
+        if (this.plantedGrowable.getPopulation() < quantity) {
+            throw new IllegalArgumentException(TOO_LITTLE_POPULATION.formatted(this.plantedGrowable.getPopulation()));
         }
 
-        if (!empty) {
-            throw new IllegalArgumentException("Tile is already occupied");
+        final Growable takenGrowable = new Growable(growable.getPlantType(), quantity);
+
+        if (this.plantedGrowable.getPopulation() == quantity) {
+            this.plantedGrowable = null;
+            this.setRoundsPassedUntilUpdateAction(INITIAL_ROUNDS_PASSED);
+        } else {
+            this.plantedGrowable.setPopulation(this.plantedGrowable.getPopulation() - quantity);
         }
-
-        growable.setPopulation(growable.getPopulation() - GROWABLE_PLANTATION_DECREASE);
-        this.growable = growable; //TODO: !!!! Decide whether to implement Prototype here.
+        return takenGrowable;
     }
 
-
-    public void grow() {
-        //TODO: Verify on forum how the edge case of CAPACITY/2 < growable.amount < CAPACITY should be handled.
-        this.growable.setPopulation(this.growable.getPopulation() + 1);
-    }
-
-    public boolean isFull() {
-        return this.growable.getPopulation() == this.growable.getPopulation();
-    }
-
+    @Override
     public boolean isEmpty() {
-        return false;
+        return this.plantedGrowable == null;
     }
 
-    public int getPopulation() {
-        return this.growable.getPopulation();
+
+
+    @Override
+    public int getGrowablePopulation() {
+        if (this.isEmpty()) {
+            return this.plantedGrowable.getPopulation();
+        }
+
+        return MIN_CULTIAVED_POPULATION;
     }
 
-    public int getGrowthInterval() {
-        return this.growable.getGrowthInterval();
+    @Override
+    public Event update() {
+        final Event event = new Event();
+        if (!this.active()) {
+            return event;
+        }
+        this.setRoundsPassedUntilUpdateAction(this.getRoundsPassedUntilUpdateAction() - ROUNDS_PASSED_INCREMENT);
+        final int populationPreGrowth = this.plantedGrowable.getPopulation();
+
+        if (this.getRoundsPassedUntilUpdateAction() == this.plantedGrowable.getGrowthInterval()) {
+            this.plantedGrowable.grow();
+            event.setEventType(EventType.GROWABLE_POPULATION_INCREASED);
+            event.setImpact(this.plantedGrowable.getPopulation() - populationPreGrowth);
+            this.setRoundsPassedUntilUpdateAction(INITIAL_ROUNDS_PASSED);
+        }
+
+        if (this.plantedGrowable.getPopulation() >= this.getBiotope().getCapacity()) {
+            this.plantedGrowable.setPopulation((int) this.getBiotope().getCapacity());
+            event.setImpact((int) this.getBiotope().getCapacity() - populationPreGrowth);
+        }
+        return event;
     }
 
+    @Override
+    public boolean active() {
+        return !this.isEmpty() && this.plantedGrowable.getPopulation() < this.getBiotope().getCapacity();
+    }
+
+    @Override
+    public int getRoundsPassedUntilUpdateAction() {
+        return this.getRoundsPassedUntilUpdateAction();
+    }
+
+    @Override
+    public int getUpdatesLeftUntilAction() {
+        if (this.isEmpty()) {
+            return 0;
+        } else {
+            return this.plantedGrowable.getGrowthInterval() - this.getRoundsPassedUntilUpdateAction();
+        }
+    }
+
+    @Override
+    public String toString() {
+        if (this.getBiotope() == Biotope.EMPTY) {
+            return "      \n      \n      ";
+        }
+
+        final StringBuilder sb = new StringBuilder();
+
+        final int currentPopulation = this.isEmpty() ? 0 : this.plantedGrowable.getPopulation();
+        final String headerTemplate = "%s %s";
+        final String headerPostfix = this.active() ? "" + this.getUpdatesLeftUntilAction() : "*";
+
+        String header = headerTemplate.formatted(this.getBiotope().getNickName(), headerPostfix);
+        final String mid = this.isEmpty() ? "     " : "  " + this.plantedGrowable.getPlantType().getNickName() + "  ";
+        final String footer = " " + currentPopulation + "/" + (int) this.getBiotope().getCapacity()  + " ";
+
+        if (header.length() < 5) {
+            header = " " + header;
+        }
+
+        if (header.length() < 5) {
+            header += " ";
+        }
+
+        return header + "\n" + mid + "\n" + footer;
+    }
 
 }

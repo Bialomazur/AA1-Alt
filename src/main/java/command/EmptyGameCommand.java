@@ -1,6 +1,6 @@
 package command;
 
-import model.Game;
+import model.game.Game;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class EmptyGameCommand extends GameCommand {
     private static final int MIN_ARGUMENT_COUNT = 0;
     private static final int MAX_ARGUMENT_COUNT = 0;
-    public EmptyGameCommand(Game game) {
+    public EmptyGameCommand(final Game game) {
         super(game);
     }
 
@@ -32,7 +32,7 @@ public class EmptyGameCommand extends GameCommand {
 
 
     @Override
-    protected void validateArgumentsContent(List<String> args) {
+    protected void validateArgumentsContent(final List<String> args) {
 
     }
 

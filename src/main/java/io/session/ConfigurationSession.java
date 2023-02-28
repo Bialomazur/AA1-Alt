@@ -5,9 +5,9 @@ import command.setup.AddPlayerCommand;
 import command.setup.SetPlayerCountCommand;
 import command.setup.SetStartingGoldCommand;
 import command.setup.SetWinningGoldCommand;
-import command.setup.ShuffleTilesCommand;
+import command.setup.SetTileSeedCommand;
 import io.CommandWord;
-import model.Game;
+import model.game.Game;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -64,12 +64,12 @@ public class ConfigurationSession extends Session {
     protected void init() {
         this.registerCommand(CommandWord.SET_STARTING_GOLD.getWord(), new SetStartingGoldCommand(this.getGame()));
         this.registerCommand(CommandWord.SET_WINNING_GOLD.getWord(), new SetWinningGoldCommand(this.getGame()));
-        this.registerCommand(CommandWord.SHUFFLE_TILES.getWord(), new ShuffleTilesCommand(this.getGame()));
+        this.registerCommand(CommandWord.SHUFFLE_TILES.getWord(), new SetTileSeedCommand(this.getGame()));
         this.registerCommand(CommandWord.ADD_PLAYER.getWord(), new AddPlayerCommand(this.getGame()));
         this.registerCommand(CommandWord.SET_PLAYER_COUNT.getWord(), new SetPlayerCountCommand(this.getGame()));
 
         this.runDialogEntry(new String[]{HOW_MANY_PLAYERS, CommandWord.SET_PLAYER_COUNT.getWord()});
-        for (int i = 0; i < this.getGame().getPlayerCount(); i++) {
+        for (int i = 0; i < this.getGame().getLobby().getLobbySize(); i++) {
             final String[] dialog = new String[SETUP_DIALOG_ENTRY_SIZE];
             dialog[SETUP_DIALOG_MESSAGE_INDEX] = String.format(ENTER_PLAYER_NAME, i + PLAYER_NUMBER_INCREMENT);
             dialog[SETUP_DIALOG_COMMAND_INDEX] = CommandWord.ADD_PLAYER.getWord();
